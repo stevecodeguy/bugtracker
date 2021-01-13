@@ -1,15 +1,13 @@
-import { useEffect } from 'react';
+import SignInForm from './components/SignInForm';
+import SignUpForm from './components/SignUpForm';
 
 function App() {
-  useEffect(() => {
-    fetch('http://localhost:3300/user/signup')
-      .then(res => console.log(res))
-      .catch(() => console.error('Failed'));
-
-  }, []);
-
   return (
-    <h1>App active</h1>
+    <>
+      <h1>Sign In</h1>
+      <SignInForm />
+      <SignUpForm />
+    </>
   );
 }
 
