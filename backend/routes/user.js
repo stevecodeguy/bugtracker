@@ -11,8 +11,8 @@ const jwt = require('jsonwebtoken');
 
 userRouter.post(
   '/signup',
-  body('username').not().isEmpty().trim().escape(),
-  body('password').not().isEmpty().trim().escape(),
+  body('username').not().isEmpty().trim().escape().isLength({ min: 4 }),
+  body('password').not().isEmpty().trim().escape().isLength({ min: 4 }),
   body('email').isEmail().normalizeEmail(),
   async (req, res) => {
     const errors = validationResult(req);
@@ -67,7 +67,7 @@ userRouter.post(
 userRouter.post(
   '/signin',
   body('username').not().isEmpty().trim().escape().isLength({ min: 4 }),
-  body('password').not().isEmpty().trim().escape().isLength({ min: 6 }),
+  body('password').not().isEmpty().trim().escape().isLength({ min: 4 }),
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

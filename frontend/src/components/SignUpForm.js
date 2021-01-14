@@ -10,7 +10,6 @@ export default function SignUpForm() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         })
-            // .then(res => res.json())
             .then(data => console.log('Success:', data))
             .catch(err => console.error('Error:', err));
     };
