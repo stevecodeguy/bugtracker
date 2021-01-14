@@ -1,4 +1,6 @@
 const express = require('express');
+require('dotenv').config();
+
 const User = require('../models/userSchema');
 
 const userRouter = express.Router();
@@ -7,12 +9,12 @@ const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-userRouter.post('/signup',
+userRouter.post(
+  '/signup',
   body('username').not().isEmpty().trim().escape(),
   body('password').not().isEmpty().trim().escape(),
   body('email').isEmail().normalizeEmail(),
   async (req, res) => {
-    console.log(req.body)
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({
@@ -48,8 +50,8 @@ userRouter.post('/signup',
 
       jwt.sign(
         payload,
-        "hashString",
-        { expiresIn: 10000 },
+        process.env.JWT_KEY,
+        { expiresIn: '1h' },
         (err, token) => {
           if (err) throw err;
           res.status(200).json({ token });
@@ -94,8 +96,8 @@ userRouter.post(
 
       jwt.sign(
         payload,
-        "hashString",
-        {expiresIn: 3600},
+        process.env.JWT_KEY,
+        {expiresIn: '1h'},
         (err, token) => {
           if (err) throw err;
           console.log(token)

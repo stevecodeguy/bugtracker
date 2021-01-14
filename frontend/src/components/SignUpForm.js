@@ -5,13 +5,12 @@ import { useForm } from 'react-hook-form';
 export default function SignUpForm() {
     const { register, handleSubmit } = useForm();
     const onSubmit = data => {
-        console.log(JSON.stringify(data))
         fetch('http://localhost:3300/user/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         })
-            .then(res => res.json())
+            // .then(res => res.json())
             .then(data => console.log('Success:', data))
             .catch(err => console.error('Error:', err));
     };
