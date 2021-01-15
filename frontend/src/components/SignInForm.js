@@ -10,7 +10,10 @@ export default function SignInForm() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         })
-            .then(data => console.log('Success:', data))
+            .then(async data => {
+                const jsonData = await data.json();
+                localStorage.setItem('token', jsonData.token);
+            })
             .catch(err => console.error('Error:', err));
     };
 

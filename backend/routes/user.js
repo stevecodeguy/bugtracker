@@ -50,7 +50,7 @@ userRouter.post(
 
       jwt.sign(
         payload,
-        process.env.JWT_KEY,
+        process.env.JWT_SECRET,
         { expiresIn: '1h' },
         (err, token) => {
           if (err) throw err;
@@ -81,10 +81,10 @@ userRouter.post(
       const user = await User.findOne({ username });
       const matchPassword = await bcrypt.compare(password, user.password);
       if (!user || !matchPassword) {
-        return res.status(400).json({ 
+        return res.status(400).json({
           message: 'Unable to log in',
           user,
-          matchPassword 
+          matchPassword
         });
       }
 
@@ -96,14 +96,11 @@ userRouter.post(
 
       jwt.sign(
         payload,
-        process.env.JWT_KEY,
-        {expiresIn: '1h'},
+        process.env.JWT_SECRET,
+        { expiresIn: '1h' },
         (err, token) => {
           if (err) throw err;
-          console.log(token)
-          res.status(200).json({
-            token
-          });
+          res.status(200).json({ token });
         }
       );
 
