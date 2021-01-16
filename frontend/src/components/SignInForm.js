@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { useForm } from 'react-hook-form';
 
+import { SessionContext } from '../context/Session';
+
 export default function SignInForm() {
+    const { setToken } = useContext(SessionContext);
     const { register, handleSubmit } = useForm();
     const onSubmit = data => {
         fetch('http://localhost:3300/user/signin', {
@@ -12,7 +15,9 @@ export default function SignInForm() {
         })
             .then(async data => {
                 const jsonData = await data.json();
-                localStorage.setItem('token', jsonData.token);
+                const token = jsonData.token;
+                localStorage.setItem('token', token);
+                setToken(token);
             })
             .catch(err => console.error('Error:', err));
     };
