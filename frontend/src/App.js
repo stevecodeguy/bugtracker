@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 
-import SignInForm from './components/SignInForm';
-import SignUpForm from './components/SignUpForm';
+import SignInUp from './components/SignInUp';
 import SignOutButton from './components/SignOutButton';
 
 import { SessionContext } from './context/Session';
@@ -11,10 +10,12 @@ function App() {
 
   return (
     <>
-      {token ? <SignOutButton /> : null}
-      <h1>Sign In</h1>
-      <SignInForm />
-      <SignUpForm />
+      {
+        token ?
+          <SignOutButton />
+          :
+          <SignInUp />
+      }
       {/* <button onClick={() => {
         fetch('http://localhost:3300/user/test', {
           method: 'POST',

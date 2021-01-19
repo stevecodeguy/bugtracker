@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 
 import { useForm } from 'react-hook-form';
 
+import '../css/signInUp.css';
+
 import { SessionContext } from '../context/Session';
 
 export default function SignInForm() {
@@ -24,6 +26,7 @@ export default function SignInForm() {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
+            <h2>Sign In</h2>
             <label name='username'>Username:</label>
             <input name='username' ref={register({ required: true })} />
             <label name='password'>Password:</label>

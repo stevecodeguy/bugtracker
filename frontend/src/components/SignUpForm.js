@@ -2,6 +2,8 @@ import React from 'react';
 
 import { useForm } from 'react-hook-form';
 
+import '../css/signInUp.css';
+
 export default function SignUpForm() {
     const { register, handleSubmit } = useForm();
     const onSubmit = data => {
@@ -19,6 +21,7 @@ export default function SignUpForm() {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
+            <h2>Sign Up</h2>
             <label name='username'>Username:</label>
             <input name='username' ref={register({ required: true, min: 4 })} />
             <label name='email'>Email:</label>
